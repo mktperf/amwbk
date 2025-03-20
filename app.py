@@ -3,7 +3,7 @@ from flask import Flask, request, jsonify
 app = Flask(__name__)
 
 # Token de verificação do Facebook
-VERIFY_TOKEN = "sec-123-@1"
+VERIFY_TOKEN = "sec01010101"
 
 @app.route("/", methods=["GET"])
 def home():
