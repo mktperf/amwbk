@@ -5,6 +5,11 @@ app = Flask(__name__)
 # Token de verificação do Facebook
 VERIFY_TOKEN = "sec-123-@1"
 
+@app.route("/", methods=["GET"])
+def home():
+    """Rota principal para evitar erro 404 no Render"""
+    return "Webhook ativo!", 200
+
 @app.route('/webhook', methods=['GET'])
 def verify():
     """Validação do Webhook pelo Facebook"""
