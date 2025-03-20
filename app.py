@@ -7,16 +7,25 @@ VERIFY_TOKEN = "sec-123-@1"
 
 @app.route('/webhook', methods=['GET'])
 def verify():
+    """Validação do Webhook pelo Facebook"""
     token = request.args.get("hub.verify_token")
     challenge = request.args.get("hub.challenge")
+    
     if token == VERIFY_TOKEN:
-        return challenge
+        return challenge  # O Facebook espera esse retorno para validar o webhook
     return "Token inválido", 403
 
 @app.route('/webhook', methods=['POST'])
 def receive_data():
-    data = request.json
-    print(f"Dados recebidos: {data}")
+    """Recebendo dados do Webhook"""
+    data = request.get_json()
+
+    # Verifica se há dados recebidos
+    if data:
+        print(f"🔹 Dados recebidos: {data}")
+    else:
+        print("⚠️ Nenhum dado recebido!")
+
     return jsonify({"status": "Recebido"}), 200
 
 if __name__ == '__main__':
